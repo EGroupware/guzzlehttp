@@ -15,7 +15,7 @@
         "php": ">=5.3.2",
         "guzzle/common": "^3.9.2",
         "guzzle/parser": "^3.9.2",
-        "egroupware/guzzlestream": "^3.9.3"
+        "egroupware/guzzlestream": "^3.9.4"
     },
     "replace": {
         "guzzle/http": "*"
