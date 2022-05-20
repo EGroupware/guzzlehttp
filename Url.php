@@ -37,6 +37,9 @@ class Url
             throw new InvalidArgumentException('Was unable to parse malformed url: ' . $url);
         }
 
+		// parse_url does NOT decode the urlencoded password, need to do so now, to not have curl encode it a 2nd time
+		if (!empty($parts['pass'])) $parts['pass'] = urldecode($parts['pass']);
+
         $parts += $defaults;
 
         // Convert the query string into a QueryString object
@@ -70,7 +73,8 @@ class Url
             if (isset($parts['user'])) {
                 $url .= $parts['user'];
                 if (isset($parts['pass'])) {
-                    $url .= ':' . $parts['pass'];
+					// passwords can have url-special chars and therefore need to be url-encoded
+                    $url .= ':' . urlencode($parts['pass']);
                 }
                 $url .=  '@';
             }
